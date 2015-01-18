@@ -3,6 +3,17 @@ defmodule Crawler do
 
   @depth 2
 
+  def connect do
+    { :ok, pid } = Postgrex.Connection.start_link([
+      hostname: "localhost",
+      username: "vagrant",
+      password: "",
+      database: "vagrant"
+    ])
+
+    @db_pid pid
+  end
+
   def get_links(link, n \\ @depth) do
     case link do
       %Link{ local: local, url: url } ->
@@ -57,6 +68,7 @@ defmodule Crawler do
         get_links(%Link{ local: true, url: origin <> remove_leading_slash(url) }, n)
       end
     end
+
     #spawn Crawler, :get_links, [url, n]
   end
 end

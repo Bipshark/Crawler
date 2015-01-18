@@ -16,7 +16,7 @@ defmodule Crawler.Mixfile do
   end
 
   defp applications(:dev), do: applications(:all) ++ [:remix]
-  defp applications(_all), do: [:logger, :httpoison]
+  defp applications(_all), do: [:postgrex, :logger, :httpoison]
 
   # Dependencies can be Hex packages:
   #
@@ -31,7 +31,8 @@ defmodule Crawler.Mixfile do
       [
           {:httpoison, "~> 0.5"},
           {:floki, "~> 0.0.5"},
-          {:remix, "~> 0.0.1", only: :dev}
+          {:remix, "~> 0.0.1", only: :dev},
+          {:postgrex, "~> 0.6"}
       ]
   end
 end
